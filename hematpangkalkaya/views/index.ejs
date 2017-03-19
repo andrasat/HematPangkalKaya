@@ -7,5 +7,44 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+    <p>Input your budget limit for below categories</p>
+
+    <form action="/" method="post">
+      Makan: <br>
+      <input id="cat-form1" name="food"> <br>
+      Transport: <br>
+      <input id="cat-form2" name="transport"> <br>
+      Entertainment: <br>
+      <input id="cat-form3" name="entertainment"> <p id="valid"></p>
+      <button type="submit" onclick="return validation()">Submit</button>
+    </form>
+
+    <script>
+      function validation() {
+        let cat1 = document.getElementById('cat-form1').value,
+            cat2 = document.getElementById('cat-form2').value,
+            cat3 = document.getElementById('cat-form3').value,
+            text = ''
+
+        if(isNaN(cat1) || cat1 <= 0 || cat1 === ''){
+          text = 'Please input a valid number'
+          document.getElementById('valid').innerHTML = text
+          return false
+        } else if(isNaN(cat2) || cat2 <= 0 || cat2 === ''){
+          text = 'Please input a valid number'
+          document.getElementById('valid').innerHTML = text
+          return false
+        } else if(isNaN(cat3) || cat3 <= 0 || cat3 === ''){
+          text = 'Please input a valid number'
+          document.getElementById('valid').innerHTML = text
+          return false
+        } else {
+          return true
+        }
+
+      }
+    </script>
+
   </body>
 </html>

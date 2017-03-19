@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <form action="/input-expense" method="post">
+      Category <br>
+      <select id="cat" name="category">
+        <option disabled selected value> - select a category -</option>
+        <option value=1>Food & Drinks</option>
+        <option value=2>Transport</option>
+        <option value=3>Entertainment</option>
+      </select> <br>
+      Description : <br>
+      <input type="text" name="desc"><br>
+      Expenses : <br>
+      <input id="expen" name="exp"> <p id="valid"></p>
+      <button type='submit' onclick="return validation()">Submit</button>
+    </form>
+
+    <script>
+      function validation() {
+        let x = document.getElementById('expen').value,
+            cat = document.getElementById('cat').value,
+            text = ''
+
+        if(isNaN(x) || x < 0 || cat == ''){
+          text = 'Please input a valid number'
+          document.getElementById('valid').innerHTML = text
+          return false
+        } else {
+          return true
+        }
+
+      }
+    </script>
+
+  </body>
+</html>
