@@ -48,7 +48,7 @@ router.get('/result', function(req, res) {
               entertainment.push(expense)
             }
           })
-          res.render('expenses-result', {foods: food, transports: transport, entertainments: entertainment, title: 'Hemat Pangkal Kaya', sum: sum})
+          res.render('expenses-result', {limits: limits, foods: food, transports: transport, entertainments: entertainment, title: 'Hemat Pangkal Kaya', sum: sum})
         })
     })
     .catch((err)=> {

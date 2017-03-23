@@ -3,13 +3,37 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js'></script>
   </head>
   <body>
 
   <a href="/expense/input"> Add expenses</a>
 
-  <h1>YOUR BUDGET = <%= sum %></h1>
+  <div class='container'>
+  <% let foodSum = 0 %>
+  <% for(let i=0; i < foods.length; i++) { %>
+  <% foodSum += foods[i].expense %>
+  <% } %>
+
+  <h1>Your Budget Total = <%= sum %></h1>
   <h1>Makan</h1>
+  <table>
+    <tr>
+      <td>Limit: </td>
+      <td><%= limits[0].limit %></td>
+    </tr>
+    <tr>
+      <td>Total Expense : </td>
+      <td><%= foodSum %></td>
+    </tr>
+    <tr>
+      <td>Balance : </td>
+      <td><span id=''><%= limits[0].limit - foodSum %></td>
+      </tr>
+  </table>
+  <br>
+
     <table>
       <thead>
         <th>Date</th>
@@ -28,7 +52,28 @@
   </table>
   <br><br><hr>
 
+  <% let transportSum = 0 %>
+  <% for(let i=0; i < transports.length; i++) { %>
+  <% transportSum += transports[i].expense %>
+  <% } %>
+
   <h1>Transport</h1>
+  <table>
+    <tr>
+      <td>Limit: </td>
+      <td><%= limits[1].limit %></td>
+    </tr>
+    <tr>
+      <td>Total Expense : </td>
+      <td><%= transportSum %></td>
+    </tr>
+    <tr>
+      <td>Balance : </td>
+      <td><span id=''><%= limits[1].limit - transportSum %></td>
+      </tr>
+  </table>
+  <br>
+
     <table>
       <thead>
         <th>Date</th>
@@ -46,7 +91,28 @@
     </table>
     <br><br><hr>
 
-  <h1>Entertainment</h1>
+    <% let entertainmentSum = 0 %>
+    <% for(let i=0; i < entertainments.length; i++) { %>
+    <% entertainmentSum += entertainments[i].expense %>
+    <% } %>
+
+    <h1>Transport</h1>
+    <table>
+      <tr>
+        <td>Limit: </td>
+        <td><%= limits[2].limit %></td>
+      </tr>
+      <tr>
+        <td>Total Expense : </td>
+        <td><%= entertainmentSum %></td>
+      </tr>
+      <tr>
+        <td>Balance : </td>
+        <td><span id=''><%= limits[2].limit - entertainmentSum %></td>
+        </tr>
+    </table>
+    <br>
+
     <table>
       <thead>
         <th>Date</th>
@@ -62,6 +128,38 @@
       </tbody>
   <% } %>
     </table>
+  </div>
+
+  <div class='container'>
+    <canvas id='mycanvas' width='500' height='500'></canvas>
+  </div>
+  <script>
+    $(document).ready(()=> {
+      let ctx = $('#mycanvas').get(0).getContext('2d')
+      let totalSum = <%= foodSum %> + <%= transportSum %> + <%= entertainmentSum %>
+      let data = [
+        {
+          value: Math.round((<%= foodSum %> / totalSum) * 100),
+          color: 'red',
+          highlight: 'pink',
+          label: 'Food and Drinks'
+        },
+        {
+          value: Math.round((<%= transportSum %> / totalSum) * 100),
+          color: 'yellow',
+          highlight: 'orange',
+          label: 'Transport'
+        },
+        {
+          value: Math.round((<%= entertainmentSum %> / totalSum) * 100),
+          color: 'blue',
+          highlight: 'cyan',
+          label: 'Entertainment'
+        }
+      ]
+      let piechart = new Chart(ctx).Pie(data)
+    })
+  </script>
 
   </body>
 </html>
