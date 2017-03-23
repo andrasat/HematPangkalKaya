@@ -33,7 +33,7 @@ router.post('/', function(req, res) {
             break;
         }
       })
-      res.redirect('/input-expense')
+      res.redirect('/expense/input')
     }).catch((err)=> {
       res.send('Input query failed')
     })

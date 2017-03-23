@@ -6,7 +6,9 @@
   </head>
   <body>
 
-    <form action="/input-expense" method="post">
+  <a href='/expense/result'>Result Page</a>
+
+    <form action="/expense/input" method="post">
       Category <br>
       <select id="cat" name="category">
         <option disabled selected value> - select a category -</option>
@@ -17,7 +19,9 @@
       Description : <br>
       <input type="text" name="desc"><br>
       Expenses : <br>
-      <input id="expen" name="exp"> <p id="valid"></p>
+      <input type='text' id="expen" name="exp"><br>
+      Date : <br>
+      <input type='date' id="date" name="date"> <p id="valid"></p>
       <button type='submit' onclick="return validation()">Submit</button>
     </form>
 

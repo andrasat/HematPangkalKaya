@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+  <a href="/expense/input"> Add expenses</a>
+
+  <h1>YOUR BUDGET = <%= sum %></h1>
+  <h1>Makan</h1>
+    <table>
+      <thead>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Expenses</th>
+        <th>Action</th>
+      </thead>
+  <% for(let i=0; i < foods.length; i++) { %>
+      <tbody>
+        <td><%= convDate.formatDate(foods[i].date) %></td>
+        <td><%= foods[i].description %></td>
+        <td><%= foods[i].expense %></td>
+        <td><a href='/expense/edit/<%= foods[i].id %>'>EDIT</a> <a href='/expense/delete/<%= foods[i].id %>'>DELETE</a></td>
+      </tbody>
+  <% } %>
+  </table>
+  <br><br><hr>
+
+  <h1>Transport</h1>
+    <table>
+      <thead>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Expenses</th>
+      </thead>
+  <% for(let i=0; i < transports.length; i++) { %>
+      <tbody>
+        <td><%= convDate.formatDate(transports[i].date) %></td>
+        <td><%= transports[i].description %></td>
+        <td><%= transports[i].expense %></td>
+        <td><a href='/expense/edit/<%= transports[i].id %>'>EDIT</a> <a href='/expense/delete/<%= transports[i].id %>'>DELETE</a></td>
+      </tbody>
+  <% } %>
+    </table>
+    <br><br><hr>
+
+  <h1>Entertainment</h1>
+    <table>
+      <thead>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Expenses</th>
+      </thead>
+  <% for(let i=0; i < entertainments.length; i++) { %>
+      <tbody>
+        <td><%= convDate.formatDate(entertainments[i].date) %></td>
+        <td><%= entertainments[i].description %></td>
+        <td><%= entertainments[i].expense %></td>
+        <td><a href='/expense/edit/<%= entertainments[i].id %>'>EDIT</a> <a href='/expense/delete/<%= entertainments[i].id %>'>DELETE</a></td>
+      </tbody>
+  <% } %>
+    </table>
+
+  </body>
+</html>
