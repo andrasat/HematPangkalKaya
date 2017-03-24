@@ -8,25 +8,40 @@
   </head>
   <body>
 
-  <a href='/expense/result'>Result Page</a>
 
+  <div class="page-limit">
+    <h1>Add Expense</h1><br>
     <form action="/expense/input" method="post">
-      Category <br>
-      <select id="cat" name="category">
-        <option disabled selected value> - select a category -</option>
-        <option value=1>Food & Drinks</option>
-        <option value=2>Transport</option>
-        <option value=3>Entertainment</option>
-      </select> <br>
-      Description : <br>
-      <input type="text" name="desc"><br>
-      Expenses : <br>
-      <input type='text' id="expen" name="exp"><br>
-      Date : <br>
-      <input type='date' id="date" name="date"> <p id="valid"></p>
-      <button type='submit' onclick="return validation()">Submit</button>
-    </form>
+      <label>
+        <p>Category</p>
+          <select id="cat" name="category">
+            <option disabled selected value> - select a category -</option>
+            <option value=1>Food & Drinks</option>
+            <option value=2>Transport</option>
+            <option value=3>Entertainment</option>
+          </select>
+      </label> <br><br>
 
+      <label>
+        <p>Description</p>
+        <input type="text" name="desc">
+      </label><br><br>
+
+      <label>
+        <p>Expenses</p>
+        <input type='text' id="expen" name="exp">
+      </label><br><br>
+
+      <label>
+        <p>Date<p>
+        <input type='date' id="date" name="date"> <p id="valid"></p>
+      </label><br><br>
+
+      <button type='submit' onclick="return validation()" id="limit-submit">Submit</button>
+      <br><br>
+      <!-- <a href='/expense/result'>Result Page</a> -->
+    </form>
+  </div>
     <script>
       function validation() {
         let x = document.getElementById('expen').value,

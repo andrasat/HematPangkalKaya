@@ -9,7 +9,7 @@ body {
 a:link {
   color: #00B7FF;
   text-decoration: none;
-  background-color: #A8FFB9;
+  /*background-color: #A8FFB9;*/
   padding: 2px 4px;
 }
 
@@ -17,11 +17,15 @@ a:hover {
   text-decoration: none;
 }
 
-td a:link {
-  color: #00B7FF;
+td a:link, a:visited {
+  color: Chocolate;
   text-decoration: none;
-  background-color: #A8FFB9;
+  /*background-color: #A8FFB9;*/
   padding: 2px 4px;
+}
+
+#x {
+  width: 15px;
 }
 
 /* WELCOME PAGE STYLING */
@@ -46,15 +50,131 @@ td a:link {
 #welcome-text {
   text-align: center;
   color: white;
-  font-size: 80px;
+  font-size: 5em;
+  line-height: 1.2em;
+  margin-top: 1.3em;
+
+  animation: fadein 2.5s;
+  -moz-animation: fadein 2.5s; /* Firefox */
+  -webkit-animation: fadein 2.5s; /* Safari and Chrome */
+  -o-animation: fadein 2.5s; /* Opera */
 }
 
 #welcome-link {
-  position: absolute;
-  left: 45%;
-  top: 50%;
+  font-size: 2.5em;
+  margin-top: 1em;
+  padding: 10px 20px;
+
+  animation: fadein 2.5s;
+  -moz-animation: fadein 2.5s; /* Firefox */
+  -webkit-animation: fadein 2.5s; /* Safari and Chrome */
+  -o-animation: fadein 2.5s; /* Opera */
+}
+@keyframes fadein {
+   from {
+       opacity:0;
+   }
+   to {
+       opacity:1;
+   }
+}
+@-moz-keyframes fadein { /* Firefox */
+   from {
+       opacity:0;
+   }
+   to {
+       opacity:1;
+   }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+   from {
+       opacity:0;
+   }
+   to {
+       opacity:1;
+   }
+}
+@-o-keyframes fadein { /* Opera */
+   from {
+       opacity:0;
+   }
+   to {
+       opacity: 1;
+   }
 }
 
-/*  */
 
 
+/* PAGE LIMIT STYLING */
+#add {
+  color: CadetBlue;
+  font-size: 1.5em;
+  border: 2px solid;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+#add:hover {
+  color: White;
+  background-color: CadetBlue;
+  font-size: 1.5em;
+  border: 1px solid;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.page-limit {
+  width:100%;
+  height: 100%;
+  text-align: center;
+}
+
+.page-limit p {
+  font-size: 20px;
+}
+
+.page-limit h3 {
+  line-height: 1.5em;
+}
+
+#limit-submit {
+  background-color: DarkCyan;
+  color: white;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 1.5em;
+}
+
+#limit-submit:hover {
+  background-color: DarkSlateGrey;
+}
+
+#valid {
+  margin-top: 0.7em;
+  color: red;
+}
+
+/* PAGE RESULT STYLING */
+.page-result-left{
+  width: 50%;
+  display: inline-block;
+}
+.page-result-right{
+  width: 50%;
+  display: inline-block;
+  float: right;
+  padding-left: 80px;
+  text-align: center;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px 15px;
+}
+
+tr:nth-child(even) {background-color: BlanchedAlmond}
+tr:nth-child(odd) {background-color: BurlyWood}
+
+.summary {
+  padding-left: 110px;
+}

@@ -10,131 +10,210 @@
   </head>
   <body>
 
-  <a href="/expense/input"> Add expenses</a>
+  <div class='page-result-left'>
+  <a href="/expense/input" id="add"> Add Expense</a><br><br>
 
-  <div class='container'>
+  <h1>Your Total Budget = <%= sum %></h1>
+  <hr>
+
+  <!---------------------------------------------------------------------------------------------------->
   <% let foodSum = 0 %>
   <% for(let i=0; i < foods.length; i++) { %>
   <% foodSum += foods[i].expense %>
   <% } %>
 
-  <h1>Your Budget Total = <%= sum %></h1>
-  <h1>Makan</h1>
+  <h2>Food & Drinks</h2>
   <table>
     <tr>
-      <td>Limit: </td>
+      <td>Limit </td>
       <td><%= limits[0].limit %></td>
     </tr>
     <tr>
-      <td>Total Expense : </td>
+      <td>Total Expense</td>
       <td><%= foodSum %></td>
     </tr>
     <tr>
-      <td>Balance : </td>
+      <td>Balance</td>
       <td><span id=''><%= limits[0].limit - foodSum %></td>
-      </tr>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <% if(foodSum < limits[0].limit*0.3 ) {%>
+        <td style="background-color: green; color: white;">SAFE</td>
+      <% } else if (foodSum < limits[0].limit*0.7){ %>
+        <td style="background-color: yellow; color: red;">WARNING</td>
+      <% } else if (foodSum > limits[0].limit*0.7){ %>
+        <td style="background-color: red; color: white;">DANGER</td>
+      <% } else if (foodSum > limits[0].limit){ %>
+        <td style="background-color: red; color: yellow;">OUT OF BUDGET</td>
+      <% } %>
+    </tr>
   </table>
   <br>
 
-    <table>
-      <thead>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Expenses</th>
-        <th>Action</th>
-      </thead>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Expenses</th>
+      <th style='text-align: center;'>Action</th>
+    </tr>
+
   <% for(let i=0; i < foods.length; i++) { %>
-      <tbody>
-        <td><%= convDate.formatDate(foods[i].date) %></td>
-        <td><%= foods[i].description %></td>
-        <td><%= foods[i].expense %></td>
-        <td><a href='/expense/edit/<%= foods[i].id %>'>EDIT</a> <a href='/expense/delete/<%= foods[i].id %>'>DELETE</a></td>
-      </tbody>
+    <tr>
+      <td><%= convDate.formatDate(foods[i].date) %></td>
+      <td><%= foods[i].description %></td>
+      <td><%= foods[i].expense %></td>
+      <td><a href='/expense/edit/<%= foods[i].id %>'>EDIT</a> | <a href='/expense/delete/<%= foods[i].id %>'>DELETE</a></td>
+    </tr>
   <% } %>
   </table>
   <br><br><hr>
 
+  <!---------------------------------------------------------------------------------------------------->
   <% let transportSum = 0 %>
   <% for(let i=0; i < transports.length; i++) { %>
   <% transportSum += transports[i].expense %>
   <% } %>
 
-  <h1>Transport</h1>
+  <h2>Transport</h2>
   <table>
     <tr>
-      <td>Limit: </td>
+      <td>Limit </td>
       <td><%= limits[1].limit %></td>
     </tr>
     <tr>
-      <td>Total Expense : </td>
+      <td>Total Expense</td>
       <td><%= transportSum %></td>
     </tr>
     <tr>
-      <td>Balance : </td>
+      <td>Balance</td>
       <td><span id=''><%= limits[1].limit - transportSum %></td>
-      </tr>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <% if(transportSum < limits[1].limit*0.3 ) {%>
+        <td style="background-color: green; color: white;">SAFE</td>
+      <% } else if (transportSum < limits[1].limit*0.7){ %>
+        <td style="background-color: yellow; color: red;">WARNING</td>
+      <% } else if (transportSum > limits[1].limit*0.7){ %>
+        <td style="background-color: red; color: white;">DANGER</td>
+      <% } else if (transportSum > limits[1].limit){ %>
+        <td style="background-color: red; color: yellow;">OUT OF BUDGET</td>
+      <% } %>
+    </tr>
   </table>
   <br>
 
-    <table>
-      <thead>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Expenses</th>
-      </thead>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Expenses</th>
+      <th style='text-align: center;'>Action</th>
+    </tr>
+
   <% for(let i=0; i < transports.length; i++) { %>
-      <tbody>
-        <td><%= convDate.formatDate(transports[i].date) %></td>
-        <td><%= transports[i].description %></td>
-        <td><%= transports[i].expense %></td>
-        <td><a href='/expense/edit/<%= transports[i].id %>'>EDIT</a> <a href='/expense/delete/<%= transports[i].id %>'>DELETE</a></td>
-      </tbody>
+    <tr>
+      <td><%= convDate.formatDate(transports[i].date) %></td>
+      <td><%= transports[i].description %></td>
+      <td><%= transports[i].expense %></td>
+      <td><a href='/expense/edit/<%= transports[i].id %>'>EDIT</a> | <a href='/expense/delete/<%= transports[i].id %>'>DELETE</a></td>
+    </tr>
   <% } %>
-    </table>
-    <br><br><hr>
+  </table>
+  <br><br><hr>
 
-    <% let entertainmentSum = 0 %>
-    <% for(let i=0; i < entertainments.length; i++) { %>
-    <% entertainmentSum += entertainments[i].expense %>
-    <% } %>
+  <!---------------------------------------------------------------------------------------------------->
 
-    <h1>Transport</h1>
-    <table>
-      <tr>
-        <td>Limit: </td>
-        <td><%= limits[2].limit %></td>
-      </tr>
-      <tr>
-        <td>Total Expense : </td>
-        <td><%= entertainmentSum %></td>
-      </tr>
-      <tr>
-        <td>Balance : </td>
-        <td><span id=''><%= limits[2].limit - entertainmentSum %></td>
-        </tr>
-    </table>
+  <% let entertainmentSum = 0 %>
+  <% for(let i=0; i < entertainments.length; i++) { %>
+  <% entertainmentSum += entertainments[i].expense %>
+  <% } %>
+
+  <h2>Entertainment</h2>
+  <table>
+    <tr>
+      <td>Limit </td>
+      <td><%= limits[2].limit %></td>
+    </tr>
+    <tr>
+      <td>Total Expense</td>
+      <td><%= entertainmentSum %></td>
+    </tr>
+    <tr>
+      <td>Balance</td>
+      <td><span id=''><%= limits[2].limit - entertainmentSum %></td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <% if(entertainmentSum < limits[2].limit*0.3 ) {%>
+        <td style="background-color: green; color: white;">SAFE</td>
+      <% } else if (entertainmentSum < limits[2].limit*0.7){ %>
+        <td style="background-color: yellow; color: red;">WARNING</td>
+      <% } else if (entertainmentSum > limits[2].limit*0.7){ %>
+        <td style="background-color: red; color: white;">DANGER</td>
+      <% } else if (entertainmentSum > limits[2].limit){ %>
+        <td style="background-color: red; color: yellow;">OUT OF BUDGET</td>
+      <% } %>
+    </tr>
+  </table>
+  <br>
+
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Expenses</th>
+      <th style='text-align: center'>Action</th>
+    </tr>
+
+  <% for(let i=0; i < entertainments.length; i++) { %>
+    <tr>
+      <td><%= convDate.formatDate(entertainments[i].date) %></td>
+      <td><%= entertainments[i].description %></td>
+      <td><%= entertainments[i].expense %></td>
+      <td><a href='/expense/edit/<%= entertainments[i].id %>'>EDIT</a> | <a href='/expense/delete/<%= entertainments[i].id %>'>DELETE</a></td>
+    </tr>
+  <% } %>
+  </table>
+  </div>
+
+  <!---------------------------------------------------------------------------------------------------->
+
+  <div class='page-result-right'>
+    <canvas id='mycanvas' width='500' height='500'></canvas>
+    <h3>Chart of Total Expense</h3>
     <br>
 
+    <% let totalSum = foodSum +  transportSum  +  entertainmentSum %>
+
+    <div class='summary'>
     <table>
-      <thead>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Expenses</th>
-      </thead>
-  <% for(let i=0; i < entertainments.length; i++) { %>
-      <tbody>
-        <td><%= convDate.formatDate(entertainments[i].date) %></td>
-        <td><%= entertainments[i].description %></td>
-        <td><%= entertainments[i].expense %></td>
-        <td><a href='/expense/edit/<%= entertainments[i].id %>'>EDIT</a> <a href='/expense/delete/<%= entertainments[i].id %>'>DELETE</a></td>
-      </tbody>
-  <% } %>
+      <tr>
+        <td>Food & Drinks</td>
+        <td><%= Math.round(( foodSum  / totalSum) * 100) %> %</td>
+        <td><%= foodSum %></td>
+      </tr>
+      <tr>
+        <td>Transport</td>
+        <td><%= Math.round((transportSum / totalSum) * 100) %> %</td>
+        <td><%= transportSum %></td>
+      </tr>
+      <tr>
+        <td>Entertainment</td>
+        <td><%= Math.round((entertainmentSum / totalSum) * 100) %> %</td>
+        <td><%= entertainmentSum %></td>
+      </tr>
+      <tr style="background-color: yellow;">
+        <td>Total Expense</td>
+        <td>100 %</td>
+        <td><%= totalSum %></td>
+      </tr>
     </table>
   </div>
-
-  <div class='container'>
-    <canvas id='mycanvas' width='500' height='500'></canvas>
   </div>
+
   <script>
     $(document).ready(()=> {
       let ctx = $('#mycanvas').get(0).getContext('2d')
@@ -148,14 +227,14 @@
         },
         {
           value: Math.round((<%= transportSum %> / totalSum) * 100),
-          color: 'yellow',
-          highlight: 'orange',
+          color: 'orange',
+          highlight: 'yellow',
           label: 'Transport'
         },
         {
           value: Math.round((<%= entertainmentSum %> / totalSum) * 100),
           color: 'blue',
-          highlight: 'cyan',
+          highlight: 'lightblue',
           label: 'Entertainment'
         }
       ]

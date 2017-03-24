@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "andras",
-    "password": "andras",
+    "username": "postgres",
+    "password": 101225,
     "database": "hemat",
     "host": "127.0.0.1",
     "dialect": "postgres"
