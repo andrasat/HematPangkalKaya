@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var convDate = require('./helpers/conv-date')
+var accounting = require('./public/javascript/accounting')
 
 var index = require('./routes/index');
 var expense = require('./routes/expense');
@@ -25,8 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/expense', expense);
-app.locals.convDate = convDate
-
+app.locals.convDate = convDate;
+app.locals.accounting = accounting;
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

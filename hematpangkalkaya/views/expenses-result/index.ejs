@@ -6,6 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js'></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
@@ -13,7 +14,7 @@
   <div class='page-result-left'>
   <a href="/expense/input" id="add"> Add Expense</a><br><br>
 
-  <h1>Your Total Budget = <%= sum %></h1>
+  <h1>Your Total Budget = <%= accounting.formatMoney(sum, "Rp. ", 0) %></h1>
   <hr>
 
   <!---------------------------------------------------------------------------------------------------->
@@ -26,15 +27,15 @@
   <table>
     <tr>
       <td>Limit </td>
-      <td><%= limits[0].limit %></td>
+      <td><%= accounting.formatMoney(limits[0].limit, "Rp. ", 0) %></td>
     </tr>
     <tr>
       <td>Total Expense</td>
-      <td><%= foodSum %></td>
+      <td><%= accounting.formatMoney(foodSum, "Rp. ", 0) %></td>
     </tr>
     <tr>
       <td>Balance</td>
-      <td><span id=''><%= limits[0].limit - foodSum %></td>
+      <td><span id=''><%= accounting.formatMoney((limits[0].limit - foodSum), "Rp. ", 0) %></td>
     </tr>
     <tr>
       <td>Status</td>
@@ -42,9 +43,9 @@
         <td style="background-color: green; color: white;">SAFE</td>
       <% } else if (foodSum < limits[0].limit*0.7){ %>
         <td style="background-color: yellow; color: red;">WARNING</td>
-      <% } else if (foodSum > limits[0].limit*0.7){ %>
+      <% } else if (foodSum > limits[0].limit*0.7 && foodSum < limits[1].limit){ %>
         <td style="background-color: red; color: white;">DANGER</td>
-      <% } else if (foodSum > limits[0].limit){ %>
+      <% } else { %>
         <td style="background-color: red; color: yellow;">OUT OF BUDGET</td>
       <% } %>
     </tr>
@@ -63,7 +64,7 @@
     <tr>
       <td><%= convDate.formatDate(foods[i].date) %></td>
       <td><%= foods[i].description %></td>
-      <td><%= foods[i].expense %></td>
+      <td><%= accounting.formatMoney(foods[i].expense, "Rp. ", 0) %></td>
       <td><a href='/expense/edit/<%= foods[i].id %>'>EDIT</a> | <a href='/expense/delete/<%= foods[i].id %>'>DELETE</a></td>
     </tr>
   <% } %>
@@ -80,15 +81,15 @@
   <table>
     <tr>
       <td>Limit </td>
-      <td><%= limits[1].limit %></td>
+      <td><%= accounting.formatMoney(limits[1].limit, "Rp. ", 0) %></td>
     </tr>
     <tr>
       <td>Total Expense</td>
-      <td><%= transportSum %></td>
+      <td><%= accounting.formatMoney(transportSum, "Rp. ", 0) %></td>
     </tr>
     <tr>
       <td>Balance</td>
-      <td><span id=''><%= limits[1].limit - transportSum %></td>
+      <td><span id=''><%= accounting.formatMoney((limits[1].limit - transportSum), "Rp. ", 0) %></td>
     </tr>
     <tr>
       <td>Status</td>
@@ -96,9 +97,9 @@
         <td style="background-color: green; color: white;">SAFE</td>
       <% } else if (transportSum < limits[1].limit*0.7){ %>
         <td style="background-color: yellow; color: red;">WARNING</td>
-      <% } else if (transportSum > limits[1].limit*0.7){ %>
+      <% } else if (transportSum > limits[1].limit*0.7 && transportSum < limits[1].limit){ %>
         <td style="background-color: red; color: white;">DANGER</td>
-      <% } else if (transportSum > limits[1].limit){ %>
+      <% } else { %>
         <td style="background-color: red; color: yellow;">OUT OF BUDGET</td>
       <% } %>
     </tr>
@@ -117,7 +118,7 @@
     <tr>
       <td><%= convDate.formatDate(transports[i].date) %></td>
       <td><%= transports[i].description %></td>
-      <td><%= transports[i].expense %></td>
+      <td><%= accounting.formatMoney(transports[i].expense, "Rp. ", 0) %></td>
       <td><a href='/expense/edit/<%= transports[i].id %>'>EDIT</a> | <a href='/expense/delete/<%= transports[i].id %>'>DELETE</a></td>
     </tr>
   <% } %>
@@ -135,15 +136,15 @@
   <table>
     <tr>
       <td>Limit </td>
-      <td><%= limits[2].limit %></td>
+      <td><%= accounting.formatMoney(limits[2].limit, "Rp. ", 0) %></td>
     </tr>
     <tr>
       <td>Total Expense</td>
-      <td><%= entertainmentSum %></td>
+      <td><%= accounting.formatMoney(entertainmentSum, "Rp. ", 0) %></td>
     </tr>
     <tr>
       <td>Balance</td>
-      <td><span id=''><%= limits[2].limit - entertainmentSum %></td>
+      <td><span id=''><%= accounting.formatMoney((limits[2].limit - entertainmentSum), "Rp. ", 0) %></td>
     </tr>
     <tr>
       <td>Status</td>
@@ -151,9 +152,9 @@
         <td style="background-color: green; color: white;">SAFE</td>
       <% } else if (entertainmentSum < limits[2].limit*0.7){ %>
         <td style="background-color: yellow; color: red;">WARNING</td>
-      <% } else if (entertainmentSum > limits[2].limit*0.7){ %>
+      <% } else if (entertainmentSum > limits[2].limit*0.7 && entertainmentSum < limits[2].limit){ %>
         <td style="background-color: red; color: white;">DANGER</td>
-      <% } else if (entertainmentSum > limits[2].limit){ %>
+      <% } else { %>
         <td style="background-color: red; color: yellow;">OUT OF BUDGET</td>
       <% } %>
     </tr>
@@ -172,7 +173,7 @@
     <tr>
       <td><%= convDate.formatDate(entertainments[i].date) %></td>
       <td><%= entertainments[i].description %></td>
-      <td><%= entertainments[i].expense %></td>
+      <td><%= accounting.formatMoney(entertainments[i].expense, "Rp. ", 0) %></td>
       <td><a href='/expense/edit/<%= entertainments[i].id %>'>EDIT</a> | <a href='/expense/delete/<%= entertainments[i].id %>'>DELETE</a></td>
     </tr>
   <% } %>
@@ -182,7 +183,7 @@
   <!---------------------------------------------------------------------------------------------------->
 
   <div class='page-result-right'>
-    <canvas id='mycanvas' width='500' height='500'></canvas>
+    <canvas id='mycanvas' width='400' height='400'></canvas>
     <h3>Chart of Total Expense</h3>
     <br>
 
@@ -193,22 +194,22 @@
       <tr>
         <td>Food & Drinks</td>
         <td><%= Math.round(( foodSum  / totalSum) * 100) %> %</td>
-        <td><%= foodSum %></td>
+        <td><%= accounting.formatMoney(foodSum, "Rp. ", 0) %></td>
       </tr>
       <tr>
         <td>Transport</td>
         <td><%= Math.round((transportSum / totalSum) * 100) %> %</td>
-        <td><%= transportSum %></td>
+        <td><%= accounting.formatMoney(transportSum, "Rp. ", 0) %></td>
       </tr>
       <tr>
         <td>Entertainment</td>
         <td><%= Math.round((entertainmentSum / totalSum) * 100) %> %</td>
-        <td><%= entertainmentSum %></td>
+        <td><%= accounting.formatMoney(entertainmentSum, "Rp. ", 0) %></td>
       </tr>
-      <tr style="background-color: yellow;">
-        <td>Total Expense</td>
-        <td>100 %</td>
-        <td><%= totalSum %></td>
+      <tr style="background-color: yellow; color: red">
+        <td><b>Total Expense</b></td>
+        <td><b>100 %</b></td>
+        <td><b><%= accounting.formatMoney(totalSum, "Rp. ", 0) %><b></td>
       </tr>
     </table>
   </div>

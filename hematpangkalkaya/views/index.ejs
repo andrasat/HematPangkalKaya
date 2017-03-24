@@ -8,7 +8,7 @@
   </head>
   <body>
   <div class="page-limit">
-    <h3>Input your budget <b>Limit</b><br>for below categories</h3><br>
+    <h2 style="line-height: 1.2em;">Input your <b>Budget Limit</b><br>for below categories</h2><br>
 
     <form action="/main" method="post">
       <label>
@@ -26,6 +26,7 @@
       <button type="submit" onclick="return validation()" id="limit-submit">Submit</button>
       <p id="valid"></p>
     </form>
+    <a href = '/expense/result'><h4>Go to Summary Page</h4></a>
   </div>
     <script>
       function validation() {
