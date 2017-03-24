@@ -2,13 +2,18 @@ var express = require('express');
 var db = require('../models/index')
 var router = express.Router();
 
+/* GET Welcome page */
+router.get('/', (req, res)=> {
+  res.render('welcome-page', { title: 'Hemat Pangkal Kaya' });
+})
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/main', function(req, res, next) {
   res.render('index', { title: 'Hemat Pangkal Kaya' });
 });
 
 // Take user input and update data in Category
-router.post('/', function(req, res) {
+router.post('/main', function(req, res) {
   db.Category.findAll()
     .then((instances)=> {
       let arr = instances.map((val)=> {
@@ -33,7 +38,7 @@ router.post('/', function(req, res) {
             break;
         }
       })
-      res.redirect('/input-expense')
+      res.redirect('/expense/input')
     }).catch((err)=> {
       res.send('Input query failed')
     })

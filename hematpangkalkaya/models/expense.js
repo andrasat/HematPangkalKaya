@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
   var Expense = sequelize.define('Expense', {
     description: DataTypes.STRING,
     expense: DataTypes.INTEGER,
-    CategoryId: DataTypes.INTEGER
+    CategoryId: DataTypes.INTEGER,
+    date: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {

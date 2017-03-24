@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+  <a href="/expense/input"> Add expenses</a>
+  <br>
+  <a href='/expense/result'>Back</a>
+
+
+  <h1>Makan</h1>
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Expenses</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% for(let i=0; i < foods.length; i++) { %>
+        <% if(foods[i].id == edit.id) { %>
+        <form action='/expense/edit/<%= edit.id %>' method='post' id='editform'>
+        <tr>
+        <td><input type='date' name='edit_date' value='<%= convDate.formatDate(edit.date) %>'></td>
+        <td><input type='text' name='edit_desc' value='<%= edit.description %>' size='20'></td>
+        <td><input type='text' name='edit_expense' value='<%= edit.expense %>' size='10'></td>
+        <td><button type='submit' form='editform'>Submit</button><td>
+        </tr>
+        </form>
+        <% } else { %>
+        <tr>
+        <td><%= convDate.formatDate(foods[i].date) %></td>
+        <td><%= foods[i].description %></td>
+        <td><%= foods[i].expense %></td>
+        <td><a href='/expense/edit/<%= foods[i].id %>'>EDIT</a> <a href='/expense/delete/<%= foods[i].id %>'>DELETE</a></td>
+        </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+  <br><br><hr>
+
+  <h1>Transport</h1>
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Expenses</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% for(let i=0; i < transports.length; i++) { %>
+        <% if(transports[i].id == edit.id) { %>
+        <form action='/expense/edit/<%= edit.id %>' method='post' id='editform'>
+        <tr>
+        <td><input type='date' name='edit_date' value='<%= convDate.formatDate(edit.date) %>'></td>
+        <td><input type='text' name='edit_desc' value='<%= edit.description %>' size='20'></td>
+        <td><input type='text' name='edit_expense' value='<%= edit.expense %>' size='10'></td>
+        <td><button type='submit' form='editform'>Submit</button><td>
+        </tr>
+        </form>
+        <% } else { %>
+        <tr>
+        <td><%= convDate.formatDate(transports[i].date) %></td>
+        <td><%= transports[i].description %></td>
+        <td><%= transports[i].expense %></td>
+        <td><a href='/expense/edit/<%= transports[i].id %>'>EDIT</a> <a href='/expense/delete/<%= transports[i].id %>'>DELETE</a></td>
+        </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+  <br><br><hr>
+
+  <h1>Entertainment</h1>
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Expenses</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% for(let i=0; i < entertainments.length; i++) { %>
+        <% if(entertainments[i].id == edit.id) { %>
+        <form action='/expense/edit/<%= edit.id %>' method='post' id='editform'>
+        <tr>
+        <td><input type='date' name='edit_date' value='<%= convDate.formatDate(edit.date) %>'></td>
+        <td><input type='text' name='edit_desc' value='<%= edit.description %>' size='20'></td>
+        <td><input type='text' name='edit_expense' value='<%= edit.expense %>' size='10'></td>
+        <td><button type='submit' form='editform'>Submit</button><td>
+        </tr>
+        </form>
+        <% } else { %>
+        <tr>
+        <td><%= convDate.formatDate(entertainments[i].date) %></td>
+        <td><%= entertainments[i].description %></td>
+        <td><%= entertainments[i].expense %></td>
+        <td><a href='/expense/edit/<%= entertainments[i].id %>'>EDIT</a> <a href='/expense/delete/<%= entertainments[i].id %>'>DELETE</a></td>
+        </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+
+  </body>
+</html>
